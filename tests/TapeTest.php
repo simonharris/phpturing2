@@ -10,7 +10,7 @@ use Phpturing\Tape;
 
 class TapeTest extends TestCase
 {
-    private $_tape;
+    private Tape $_tape;
 
     public function setUp(): void
     {
