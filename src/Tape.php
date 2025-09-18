@@ -51,4 +51,9 @@ class Tape implements ArrayAccess
     {
         unset($this->_store[$key]);
     }
+
+    public function __toString(): string
+    {
+        return trim(join($this->_store), self::CELL_BLANK);
+    }
 }

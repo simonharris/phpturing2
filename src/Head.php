@@ -33,4 +33,9 @@ class Head
     {
         $this->_index++;
     }
+
+    public function getTape(): Tape
+    {
+        return $this->_tape;
+    }
 }
