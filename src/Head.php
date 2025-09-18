@@ -2,40 +2,39 @@
 
 namespace Phpturing;
 
-
 class Head
 {
-    private Tape $_tape;
-    private int $_index;
+    private Tape $tape;
+    private int $index;
 
     public function __construct(Tape $tape)
     {
-        $this->_tape = $tape;
-        $this->_index = 0;
+        $this->tape = $tape;
+        $this->index = 0;
     }
 
     public function read(): mixed
     {
-        return $this->_tape[$this->_index];
+        return $this->tape[$this->index];
     }
 
     public function write(mixed $value): void
     {
-        $this->_tape[$this->_index] = $value;
+        $this->tape[$this->index] = $value;
     }
 
     public function moveLeft(): void
     {
-        $this->_index--;
+        $this->index--;
     }
 
     public function moveRight(): void
     {
-        $this->_index++;
+        $this->index++;
     }
 
     public function getTape(): Tape
     {
-        return $this->_tape;
+        return $this->tape;
     }
 }

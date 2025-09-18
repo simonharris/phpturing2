@@ -5,60 +5,60 @@ namespace Phpturing;
 use Phpturing\Head;
 use Phpturing\Program;
 
-
 class Machine
 {
-    const STATE_HALT = 'HALT';
+    public const STATE_HALT = 'HALT';
 
-    private Head $_head;
-    private Program $_program;
-    private string $_state;
+    private Head $head;
+    private Program $program;
+    private string $state;
 
     public function __construct(Head $head)
     {
-        $this->_head = $head;
-        $this->_state = self::STATE_HALT;
+        $this->head = $head;
+        $this->state = self::STATE_HALT;
     }
 
     public function load(Program $program): void
     {
-        $this->_program = $program;
-        $this->_state = $this->_program->getInitialState();
+        $this->program = $program;
+        $this->state = $this->program->getInitialState();
     }
 
     public function getState(): string
     {
-         return $this->_state;
+         return $this->state;
     }
 
     public function step(): void
     {
-        $input = $this->_head->read();
-        $tr = $this->_program->getTransition($this->_state, $input);
+        $input = $this->head->read();
+        $tr = $this->program->getTransition($this->state, $input);
 
         if ($write = $tr->toWrite()) {
-            $this->_head->write($write);
+            $this->head->write($write);
         }
 
         if ($state = $tr->nextState()) {
-            $this->_state = $state;
+            $this->state = $state;
         }
 
         if ($tr->nextMove() == 'R') {
-            $this->_head->moveRight();
+            $this->head->moveRight();
         } elseif ($tr->nextMove() == 'L') {
-            $this->_head->moveLeft();
+            $this->head->moveLeft();
         }
     }
 
     public function run(): void
     {
-        while ($this->_state != self::STATE_HALT) {
+        while ($this->state != self::STATE_HALT) {
             $this->step();
         }
     }
 
-    public function getTape(): Tape{
-        return $this->_head->getTape();
+    public function getTape(): Tape
+    {
+        return $this->head->getTape();
     }
 }

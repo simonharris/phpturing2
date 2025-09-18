@@ -4,12 +4,11 @@ namespace Phpturing;
 
 use ArrayAccess;
 
-
 class Tape implements ArrayAccess
 {
-    const CELL_BLANK = '_';
+    public const CELL_BLANK = '_';
 
-    private $_store = [];
+    private $store = [];
 
     public function __construct(?string $data = null)
     {
@@ -23,7 +22,7 @@ class Tape implements ArrayAccess
      */
     public function populate(string $data): void
     {
-        $this->_store = str_split($data);
+        $this->store = str_split($data);
     }
 
     /**
@@ -31,20 +30,20 @@ class Tape implements ArrayAccess
      */
     public function offsetExists(mixed $key): bool
     {
-        return TRUE;
+        return true;
     }
 
     public function offsetGet(mixed $key): mixed
     {
-        if (array_key_exists($key, $this->_store)) {
-            return $this->_store[$key];
+        if (array_key_exists($key, $this->store)) {
+            return $this->store[$key];
         }
         return self::CELL_BLANK;
     }
 
     public function offsetSet(mixed $key, mixed $val): void
     {
-        $this->_store[$key] = $val;
+        $this->store[$key] = $val;
     }
 
     public function offsetUnset(mixed $key): void
@@ -54,6 +53,6 @@ class Tape implements ArrayAccess
 
     public function __toString(): string
     {
-        return trim(join($this->_store), self::CELL_BLANK);
+        return trim(join($this->store), self::CELL_BLANK);
     }
 }
