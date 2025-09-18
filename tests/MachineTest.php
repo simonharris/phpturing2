@@ -44,12 +44,11 @@ class MachineTest extends TestCase
         #     "write": 1,
         #     "move": "R"
 
+        $this->assertEquals('state0012', $this->_machine->getState());
         $this->_mock_head->expects($this->once())->method('read')->willReturn('0');
+        $this->_mock_head->expects($this->once())->method('moveRight');
+        $this->_mock_head->expects($this->once())->method('write')->with('1');
         $this->_machine->step();
-
-        //$this->_mock_head->expects($this->once())->method('moveRight');
-        // $this->_mockhead.write.assert_called_once_with('1')
-       $this->assertEquals('state0042', $this->_machine->getState());
+        $this->assertEquals('state0042', $this->_machine->getState());
     }
-
 }

@@ -22,6 +22,6 @@ class Program
     public function getTransition(string $state, string $readval): Transition
     {
         $tr_config = $this->_transitions[$state][$readval];
-        return new Transition($tr_config['next'], $tr_config['write'], $tr_config['move']);
+        return new Transition($tr_config['next']??null, $tr_config['write']??null, $tr_config['move']??null);
     }
 }
