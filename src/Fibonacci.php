@@ -16,16 +16,12 @@ class Fibonacci
             return [];
         }
 
-        if ($count === 1) {
-            return [0];
-        }
-
         $sequence = [0, 1];
 
         for ($i = 2; $i < $count; $i++) {
             $sequence[] = $sequence[$i - 1] + $sequence[$i - 2];
         }
 
-        return $sequence;
+        return array_slice($sequence, 0, $count);
     }
 }
