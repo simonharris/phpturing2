@@ -44,4 +44,25 @@ class IntegrationTest extends TestCase
         $code  = file_get_contents($filename);
         return json_decode($code, TRUE);
     }
+
+    public function testFibonacci(): void
+    {
+        $code = $this->_readCode('programs/fibonacci.json');
+
+        $machine = new Machine(new Head(new Tape()));
+        $machine->load(new Program($code));
+        $machine->run();
+
+        $result = (string) $machine->getTape();
+        $numbers = explode('_', $result);
+
+        # Should generate 12 Fibonacci numbers
+        $this->assertCount(12, $numbers);
+
+        # Verify the sequence: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144
+        $expected = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
+        foreach ($numbers as $i => $num) {
+            $this->assertEquals($expected[$i], strlen($num));
+        }
+    }
 }
