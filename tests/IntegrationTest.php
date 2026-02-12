@@ -57,7 +57,7 @@ class IntegrationTest extends TestCase
         $numbers = explode('_', $result);
 
         # Should generate 12 Fibonacci numbers
-        $this->assertEquals(12, count($numbers));
+        $this->assertCount(12, $numbers);
 
         # Verify the sequence: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144
         $expected = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
